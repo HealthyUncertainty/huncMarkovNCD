@@ -153,7 +153,7 @@ ui <- fluidPage(
                    tags$li("3% annual discount rate for costs and QALYs (cycle 1 undiscounted; no half-cycle correction)"),
                    tags$li("Zelravine arm only: 8% annual re-treatment probability in cycles 1-3, once per patient, from all alive naive states"),
                    tags$li("Mild, Moderate and Severe states carry a mortality relative risk (default 1.35) on CDC WONDER 2020 background mortality"),
-                   tags$li("The pre-treatment baseline distribution is used only in the year-1 scenario analysis (see scan_year1() in the R package)")
+                   tags$li("Optional Time To Treatment Response switch (Toggles tab): values the first weeks of year 1 on the pre-treatment baseline distribution")
                  ),
 
                  h4("Treatments"),
@@ -227,6 +227,22 @@ ui <- fluidPage(
                             cost_row("c_intervention", "Zelravine initial course", with_se = FALSE),
                             cost_row("c_retx", "Zelravine re-treatment course", with_se = FALSE)
                    )
+                 )
+        ),
+
+        tabPanel("Toggles",
+                 br(),
+                 h4("Time To Treatment Response"),
+                 p(strong("Time To Treatment Response switch."),
+                   " In the base case, the whole first year is valued as if every patient were already at their week-12 post-treatment severity, which favours zelravine because patients don't actually improve until treatment takes effect. Turning this switch on values the first ", em("w"), " weeks of year 1 at the pre-treatment baseline severity distribution, and the remaining weeks at each arm's post-treatment distribution. The default is to switch at 12 weeks, chosen as the observation period of an underlying clinical trial. Only year-1 costs and QALYs change: mortality, transitions and life years are unaffected."),
+                 br(),
+                 checkboxInput("year1_blend", "Use Time To Treatment Response switch",
+                               value = default_params$year1_blend),
+                 conditionalPanel(
+                   condition = "input.year1_blend == true",
+                   fluidRow(column(4, numericInput("year1_switch_week", "Switch week (0-52)",
+                                                   value = default_params$year1_switch_week,
+                                                   min = 0, max = 52, step = 1)))
                  )
         ),
 
@@ -326,6 +342,8 @@ server <- function(input, output, session) {
     updateSliderInput(session, "discount_costs", value = 100 * default_params$discount_rate_costs)
     updateSliderInput(session, "discount_qalys", value = 100 * default_params$discount_rate_qalys)
     updateNumericInput(session, "wtp", value = default_params$wtp_threshold)
+    updateCheckboxInput(session, "year1_blend", value = default_params$year1_blend)
+    updateNumericInput(session, "year1_switch_week", value = default_params$year1_switch_week)
     for (nm in slider_ids)  updateSliderInput(session, nm, value = default_params[[nm]])
     for (nm in numeric_ids) updateNumericInput(session, nm, value = default_params[[nm]])
     for (nm in se_ids)      updateNumericInput(session, paste0("se_", nm), value = get_default_se(nm))
@@ -345,6 +363,9 @@ server <- function(input, output, session) {
       params$discount_rate_costs <- input$discount_costs / 100
       params$discount_rate_qalys <- input$discount_qalys / 100
       params$wtp_threshold       <- input$wtp
+      params$year1_blend         <- isTRUE(input$year1_blend)
+      if (!is.null(input$year1_switch_week) && !is.na(input$year1_switch_week))
+        params$year1_switch_week <- input$year1_switch_week
       for (nm in c(slider_ids, numeric_ids)) {
         v <- input[[nm]]
         if (!is.null(v) && !is.na(v)) params[[nm]] <- v

@@ -75,7 +75,7 @@ PSA draws follow the random-number order of the original scripts, so the package
 
 - Severity distributions in the Shiny app are editable means; PSA sampling uses fixed trial-count Dirichlet alphas (`get_dirichlet_alphas()`).
 - Utilities are sampled independently in the PSA, so about 1.9% of draws violate the Remission > Mild > Moderate > Severe ordering (as in the report). They are not constrained.
-- The year-1 blend switch and the baseline severity distribution are exposed in R (`year1_blend`, `year1_switch_week`, `scan_year1()`), not in the Shiny app.
+- The Time To Treatment Response switch (`year1_blend`, `year1_switch_week`) is on the Shiny **Toggles** tab and in R; `scan_year1()` tabulates it across switch weeks. The baseline severity distribution it uses is not editable in the app.
 - `parameter_audit.html` documents every parameter, its source and its PSA distribution. `renv.lock` pins the dependencies (regenerate with `dev/regenerate_renv_lock.R` after installing `dampack`).
 
 ## Credits and licence
