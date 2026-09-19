@@ -1,0 +1,21 @@
+bibentry(
+  bibtype = "Manual",
+  key     = "huncMarkovNCD",
+  title   = "huncMarkovNCD: Zelravine Versus Usual Care for Nocturnal Cortical Dysrhythmia: A Markov Cost-Effectiveness Model",
+  author  = person("Ian", "Cromwell"),
+  year    = "2026",
+  note    = "R package version 0.1.0. Fictional example model.",
+  url     = "https://github.com/HealthyUncertainty/huncMarkovNCD",
+  textVersion = "Cromwell I (2026). huncMarkovNCD: Zelravine Versus Usual Care for Nocturnal Cortical Dysrhythmia: A Markov Cost-Effectiveness Model. R package version 0.1.0. https://github.com/HealthyUncertainty/huncMarkovNCD"
+)
+
+bibentry(
+  bibtype = "TechReport",
+  key     = "marovex2026ncd",
+  title   = "Cost-Effectiveness Analysis of Zelravine for Nocturnal Cortical Dysrhythmia (NCD): Manufacturer's Base Case Economic Evaluation",
+  author  = person("Marovex Therapeutics Inc. (fictitious)"),
+  institution = "Prepared for a Health Technology Assessment Agency",
+  year    = "2026",
+  note    = "Fictional report generated with Claude AI for methods illustration. Included in the package (inst/report).",
+  textVersion = "Marovex Therapeutics Inc. (fictitious) (2026). Cost-Effectiveness Analysis of Zelravine for Nocturnal Cortical Dysrhythmia (NCD): Manufacturer's Base Case Economic Evaluation. Fictional report generated with Claude AI for methods illustration."
+)

@@ -1,0 +1,10 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^parameter_audit\.html$
+^dev$
+^renv$
+^renv\.lock$
+^\.github$
+^tests/validation$
+^README\.Rmd$

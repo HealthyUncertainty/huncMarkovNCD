@@ -1,0 +1,25 @@
+Package: huncMarkovNCD
+Type: Package
+Title: Zelravine Versus Usual Care for Nocturnal Cortical Dysrhythmia: A Markov Cost-Effectiveness Model
+Version: 0.1.0
+Authors@R: person("Ian", "Cromwell", email = "healthyuncertainty@gmail.com", role = c("aut", "cre"))
+Description: A cohort Markov state-transition cost-effectiveness model of zelravine versus usual care for Nocturnal Cortical Dysrhythmia (NCD), with a one-year decision-tree phase, one-time re-treatment states, deterministic and probabilistic (PSA) analysis, cost-effectiveness plane, acceptability curve, and an interactive Shiny interface. The disease, therapy, sponsor, trial data and all inputs are fictional and were invented for methods illustration; only the background mortality table (CDC WONDER, 2020) is real public data. The manufacturer's base case report is included in the package.
+License: MIT + file LICENSE
+URL: https://github.com/HealthyUncertainty/huncMarkovNCD
+BugReports: https://github.com/HealthyUncertainty/huncMarkovNCD/issues
+Depends: R (>= 4.1.0)
+Imports:
+    dplyr,
+    ggplot2,
+    scales,
+    stats,
+    utils
+Suggests:
+    dampack,
+    DT,
+    shiny,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list(markdown = FALSE)
+RoxygenNote: 7.3.1
